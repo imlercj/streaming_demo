@@ -169,3 +169,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Postgres data
+data/
+
+
+jupyter/.DS_Store
+python-job/.DS_Store
+.DS_Store
+
+README_files
