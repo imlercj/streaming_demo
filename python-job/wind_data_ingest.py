@@ -6,14 +6,32 @@ from psycopg2.extras import execute_values
 import os
 import time
 
+REQUEST_INTERVAL = 600 # 10 minutes
+
 def get_wind_data(station_id:str = "VS1721") -> dict | None:
-    url = f"https://portwind.no/api/v1/dbdata-seconds.php?stationid={station_id}&dataset=wswd&seconds=60"
-    response = get(url)
-    if response.status_code == 200:
-        data = response.json()
-        return data
-    else:
-        print(f"Error getting wind data: {response.status_code}")
+    try:
+        url = f"https://portwind.no/api/v1/dbdata-seconds.php?stationid={station_id}&dataset=wswd&seconds={REQUEST_INTERVAL}"
+        header = {  
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Encoding": "gzip, deflate",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Connection": "keep-alive",
+            "Host": "portwind.no",
+            "Referer": "https://portwind.no/",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15"
+        }
+        response = get(url, headers=header, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            return data
+        else:
+            print(f"Error getting wind data: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"Error getting wind data: {e}")
         return None
     
 def parse_wind_data(data):
@@ -81,9 +99,9 @@ def main():
                 df['station_id'] = station_id
                 insert_wind_data(df)
                 print("Data ingestion completed for station: ", station_id)
-            time.sleep(2)
+            time.sleep(10)
         
-        time.sleep(60 - (time.time() - start)) # Sleep until the next full minute
+        time.sleep(REQUEST_INTERVAL - (time.time() - start)) # Sleep until the next full minute
         
 if __name__ == "__main__":
     main()

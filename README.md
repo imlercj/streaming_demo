@@ -1,18 +1,20 @@
 # Data Streaming Demo
 
-Dette prosjektet demonstrerer hvordan en kan bruke TimescaleDB extention i Postgres til å effektivt ta i mot en strøm av data. 
+Dette prosjektet demonstrerer hvordan man kan bruke TimescaleDB-utvidelsen i PostgreSQL for å effektivt motta og lagre en kontinuerlig strøm av data. Løsningen er løst basert på et eksempel fra https://github.com/timescale/examples. 
 
 ## Datakilde
 
-I dette tilfellet er det brukt en strøm av vinddata portwind.no som strømmes inn. Det hentes data fra 4 stasjoner i og rundt Stavanger. Lasten blir gjort hvert minutt of inneholder sekundsmålinger for vindhastighet og vindrettning. 
+I dette tilfellet benyttes en datastrøm fra **portwind.no**, som leverer sanntids vinddata fra fire målestasjoner i og rundt Stavanger. Det hentes inn data hvert minutt, med sekundvise målinger av både vindhastighet og vindretning.
 
 ## Installasjon
+Start systemet med følgende kommando:
 
-Kjør `docker-compose up`
+```bash
+docker-compose up
+```
 
 ## Bruk
 
-1. Det er satt opp en Grafana dashboard
-2. En kan utforske dataene i Jupyter Lab
-
-Begge er spunnet opp i egne kontainere.
+1. Et **Grafana-dashboard** er satt opp for visualisering av dataene.
+2. Dataene kan også utforskes i **Jupyter Lab**.
+Begge verktøyene kjører i egne Docker-kontainere.
