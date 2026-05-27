@@ -1,6 +1,6 @@
 # Data Streaming Demo
 
-Dette prosjektet demonstrerer hvordan man kan bruke TimescaleDB-utvidelsen i PostgreSQL for å effektivt motta og lagre en kontinuerlig strøm av data. Løsningen er løst basert på et eksempel fra https://github.com/timescale/examples. 
+Dette prosjektet demonstrerer hvordan man kan bruke TimescaleDB-utvidelsen i PostgreSQL for å effektivt motta og lagre en kontinuerlig strøm av data. Løsningen er løst basert på et eksempel fra https://github.com/timescale/examples og ble laget som et eksempel i forbindelse med en intern Podcase jeg spilte inn i Bouvet.
 
 ## Datakilde
 
